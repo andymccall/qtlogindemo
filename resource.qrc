@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/eyeOff.png</file>
+        <file>assets/eyeOn.png</file>
+    </qresource>
+</RCC>

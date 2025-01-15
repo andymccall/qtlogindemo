@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "qpasswordlineedit.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -37,5 +38,6 @@ private:
     void updateState();
     void clear(QString message);
     void login();
+    QPasswordLineEdit *passwordLineEdit = new QPasswordLineEdit;
 };
 #endif // MAINWINDOW_H

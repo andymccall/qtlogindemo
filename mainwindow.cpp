@@ -10,6 +10,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
+    passwordLineEdit->setPlaceholderText("enter-you-password-here");
+    connect(passwordLineEdit, &QLineEdit::textEdited, this, &MainWindow::on_passwordLineEdit_textEdited);
+
+
+    ui->gridLayout->addWidget(passwordLineEdit,1,1);
+
     setFixedSize(width(),height());
     updateState();
 
@@ -26,12 +32,10 @@ void MainWindow::on_action_Exit_triggered() {
     QApplication::quit();
 }
 
-
 void MainWindow::on_action_About_Login_triggered() {
     QMessageBox::about(this, tr("About Login"),
                        tr("The application is an example of a basic QT application."));
 }
-
 
 void MainWindow::on_clearButton_clicked() {
     QString message = tr("The login form has been cleared...");
@@ -45,7 +49,7 @@ void MainWindow::on_action_Clear_triggered() {
 
 void MainWindow::clear(QString message) {
     ui->usernameLineEdit->clear();
-    ui->passwordLineEdit->clear();
+    passwordLineEdit->clear();
     usernameLineEditEdited = false;
     passwordLineEditEdited = false;
     updateState();
@@ -60,7 +64,7 @@ void MainWindow::login() {
     statusBar()->showMessage(message);
 
     std::cout << "Username: " << ui->usernameLineEdit->text().toStdString() << std::endl;
-    std::cout << "Password: " << ui->passwordLineEdit->text().toStdString() << std::endl;
+    std::cout << "Password: " << passwordLineEdit->text().toStdString() << std::endl;
     std::cout << "Remember details: " << ( ui->rememberDetails->isChecked() ? "true" : "false" ) << std::endl;
     std::cout << std::endl;
 
@@ -84,9 +88,8 @@ void MainWindow::on_usernameLineEdit_textEdited(const QString &arg1) {
     updateState();
 }
 
-
 void MainWindow::on_passwordLineEdit_textEdited(const QString &arg1) {
-    passwordLineEditEdited = !ui->passwordLineEdit->text().isEmpty();
+    passwordLineEditEdited = !passwordLineEdit->text().isEmpty();
     updateState();
 }
 
