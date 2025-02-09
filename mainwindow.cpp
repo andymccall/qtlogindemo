@@ -13,8 +13,14 @@ MainWindow::MainWindow(QWidget *parent)
     passwordLineEdit->setPlaceholderText("enter-you-password-here");
     connect(passwordLineEdit, &QLineEdit::textEdited, this, &MainWindow::on_passwordLineEdit_textEdited);
 
-
     ui->gridLayout->addWidget(passwordLineEdit,1,1);
+
+    // Set the tab order:
+    QWidget::setTabOrder(ui->usernameLineEdit, passwordLineEdit);
+    QWidget::setTabOrder(passwordLineEdit,ui->rememberDetails);
+    QWidget::setTabOrder(ui->rememberDetails, ui->loginButton);
+    QWidget::setTabOrder(ui->loginButton, ui->clearButton);
+    QWidget::setTabOrder(ui->clearButton, ui->usernameLineEdit);
 
     setFixedSize(width(),height());
     updateState();
